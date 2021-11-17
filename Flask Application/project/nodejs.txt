@@ -1,0 +1,74 @@
+https://nodejs.org/en/docs/guides/nodejs-docker-webapp/
+
+==========================================================================
+# vi package.json
+
+{
+  "name": "docker_web_app",
+  "version": "1.0.0",
+  "description": "Node.js on Docker",
+  "author": "First Last <first.last@example.com>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.1"
+  }
+}
+=============================================================================
+
+# vi server.js
+
+'use strict';
+
+const express = require('express');
+
+// Constants
+const PORT = 8081;
+const HOST = '0.0.0.0';
+
+// App
+const app = express();
+app.get('/', (req, res) => {
+  res.send('Hello World');
+});
+
+app.listen(PORT, HOST);
+console.log(`Running on http://${HOST}:${PORT}`);
+
+==================================================================================
+
+# vim Dockerfile
+
+FROM node:16-alpine3.12
+
+RUN  mkdir /tmp/node-js/
+
+WORKDIR /tmp/node-js/
+
+COPY ./project/  .
+
+RUN npm install
+
+EXPOSE 8081
+
+CMD [ "node", "server.js" ]
+
+====================================================================================
+
+[root@ip-172-31-42-100 node]# docker image ls
+REPOSITORY            TAG             IMAGE ID       CREATED              SIZE
+noelvincent/nodeapp   1               e4a3ab8de5d5   About a minute ago   115MB
+node                  16-alpine3.12   d951a5a0fae5   2 days ago           110MB
+alpine                latest          0a97eee8041e   2 days ago           5.61MB
+
+====================================================================================
+
+
+#### Testing in play with docker
+
+docker container run --name nodeapp -d -p 80:8081 noelvincent/nodeapp:1
+
+
+
