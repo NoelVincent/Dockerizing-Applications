@@ -12,7 +12,7 @@ A container is a standard unit of software that packages up code and all its dep
 You can learn more about the same in the [website.](https://www.docker.com/resources/what-container)
 
 
-# What Is Dockerizing
+# What Is a Dockerizing
 Dockerizing is the process of packing, deploying, and running applications using Docker containers. You can use Docker to pack your application with everything you need to run the application (such as libraries) and ship it as one package - a container. Containers are created from images that specify their precise contents.
 
 # Installing Docker
@@ -80,6 +80,8 @@ CMD [ "python3" , "app.py"]
 
 
 # NodeJS Application
+To know more refer the [website.](https://nodejs.org/en/docs/guides/nodejs-docker-webapp/
+)
 ```sh
 /root/NodeJS/
 ├── Dockerfile
@@ -147,4 +149,34 @@ RUN npm install
 EXPOSE 8081
 
 CMD [ "node", "server.js" ]
+```
+
+## Execution
+> Make sure the Dockerfile and the apllication files are in working directory for Docker to build the image.
+
+- Building the image
+```sh
+docker build -t <name>:<tag>  .
+```
+
+- Pushing to docker hub
+```sh
+docker login
+```
+> Log in to docker hub using the above command and before push your image to the docker hub make sure that you rename the current image or provide the proper name like below when building the image.
+```sh
+Name of the image: <docker_hub_username>/<name_of_the_image>:<tag>
+```
+Renaming the current image
+```sh
+docker image tag <name>:<tag>  <docker_hub_username>/<name_of_the_image>:<tag>
+```
+Pushing the image
+```sh
+docker push <docker_hub_username>/<name_of_the_image>:<tag>
+```
+- Running/creating a container using this image in Play With docker
+> https://labs.play-with-docker.com/
+```sh
+docker container run --name <name>  -d -p 80:5000 <docker_hub_username>/<name_of_the_image>:<tag>
 ```
