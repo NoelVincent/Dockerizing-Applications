@@ -12,7 +12,7 @@ A container is a standard unit of software that packages up code and all its dep
 You can learn more about the same in the [website.](https://www.docker.com/resources/what-container)
 
 
-# What Is a Dockerizing
+# What Is Dockerizing
 Dockerizing is the process of packing, deploying, and running applications using Docker containers. You can use Docker to pack your application with everything you need to run the application (such as libraries) and ship it as one package - a container. Containers are created from images that specify their precise contents.
 
 # Installing Docker
